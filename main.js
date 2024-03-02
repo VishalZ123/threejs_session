@@ -31,6 +31,10 @@ controls.enableDamping = true;
 
 function animate() {
   requestAnimationFrame(animate);
+  // you can use different mathematical functions to animate the cube
+  // change the rotation and position of the cube
+  cube.rotation.z += 0.05; // rotation about z-axis
+  cube.position.x = 2 * Math.sin(Date.now() * 0.002); // oscillation in x-direction
   controls.update();
   renderer.render(scene, camera);
 };
