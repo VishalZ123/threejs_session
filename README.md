@@ -8,6 +8,14 @@ Code Files for Threejs session by DevlUp Labs
 
 Change the branch to see the code for different sections.
 
+- main
+- [geometry](https://github.com/VishalZ123/threejs_session/tree/geometry)
+- [animations](https://github.com/VishalZ123/threejs_session/tree/animations)
+- [material](https://github.com/VishalZ123/threejs_session/tree/materials)
+- [lights](https://github.com/VishalZ123/threejs_session/tree/lights)
+- [textures](https://github.com/VishalZ123/threejs_session/tree/textures)
+- [custom models](https://github.com/VishalZ123/threejs_session/tree/custom_model)
+
 ---
 
 
