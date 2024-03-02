@@ -1,6 +1,7 @@
 // imports
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 
 // scene
 const scene = new THREE.Scene();
@@ -19,24 +20,28 @@ const camera = new THREE.PerspectiveCamera(60, app.offsetWidth/app.offsetHeight,
 camera.position.set(0, 1.5, 5); // a different position
 camera.lookAt(0, 0, 0); // look at the origin
 
-// Loading material takes time (reading image files) //
-
-// geometry
-const sphere_geometry = new THREE.SphereGeometry(1.5, 32, 32);
-// texture
-const texture = new THREE.TextureLoader().load('./globe.jpg');
-const sphere_material = new THREE.MeshStandardMaterial({ map: texture });
-const sphere = new THREE.Mesh(sphere_geometry, sphere_material);
-scene.add(sphere);
+// load .obj file
+const loader = new OBJLoader();
+loader.load(
+  "./FLAME_mesh.obj",
+  function (object) {
+    scene.add(object);
+  }
+);
 
 // light
 const light = new THREE.DirectionalLight(0xffffff, 1);
-light.position.set(4, 0, 0);
+light.position.set(4, 0, -1);
 scene.add(light);
 
-// ambient light
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
-scene.add(ambientLight);
+const light2 = new THREE.DirectionalLight(0xffffff, 1);
+light2.position.set(-4, 0, 1);
+scene.add(light2);
+
+// light 3
+const light3 = new THREE.PointLight(0xffffff, 1);
+light3.position.set(0, 1, 2.5);
+scene.add(light3);
 
 // controls
 const controls = new OrbitControls(camera, renderer.domElement);
