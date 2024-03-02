@@ -19,34 +19,24 @@ const camera = new THREE.PerspectiveCamera(60, app.offsetWidth/app.offsetHeight,
 camera.position.set(0, 1.5, 5); // a different position
 camera.lookAt(0, 0, 0); // look at the origin
 
+// Loading material takes time (reading image files) //
+
 // geometry
-const cube_geometry = new THREE.BoxGeometry(1, 1, 1);
-const cube_material = new THREE.MeshStandardMaterial({ color: 0xff0000, metalness: 0.5, roughness: 0.5});
-const cube = new THREE.Mesh(cube_geometry, cube_material);
-scene.add(cube);
+const sphere_geometry = new THREE.SphereGeometry(1.5, 32, 32);
+// texture
+const texture = new THREE.TextureLoader().load('./globe.jpg');
+const sphere_material = new THREE.MeshStandardMaterial({ map: texture });
+const sphere = new THREE.Mesh(sphere_geometry, sphere_material);
+scene.add(sphere);
 
-// Use different LightShadow, combination of two or more lights can also be used to create a more realistic scene
-// Intensity of the light also play a role in giving different effects to the scene
-
-// directional light
-const directionalLight = new THREE.DirectionalLight(0xffffff, 4);
-directionalLight.position.set(-1, 1, -1);
-scene.add(directionalLight);
-// helper
-const directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight, 1);
-scene.add(directionalLightHelper);
+// light
+const light = new THREE.DirectionalLight(0xffffff, 1);
+light.position.set(4, 0, 0);
+scene.add(light);
 
 // ambient light
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
 scene.add(ambientLight);
-
-// // point light
-// const light = new THREE.PointLight(0xffffff, 4);
-// light.position.set(1, 1, 1);
-// scene.add(light);
-// // helper
-// const lightHelper = new THREE.PointLightHelper(light, 0.2);
-// scene.add(lightHelper);
 
 // controls
 const controls = new OrbitControls(camera, renderer.domElement);
