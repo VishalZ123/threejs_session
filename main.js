@@ -1,5 +1,6 @@
 // imports
 import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 // scene
 const scene = new THREE.Scene();
@@ -24,16 +25,14 @@ const cube_material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
 const cube = new THREE.Mesh(cube_geometry, cube_material);
 scene.add(cube); // add the cube to the scene !! important !!
 
-const sphere_geometry = new THREE.SphereGeometry(0.5, 32, 32);
-const sphere_material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-const sphere = new THREE.Mesh(sphere_geometry, sphere_material);
-sphere.position.set(2, 0, 0);
-scene.add(sphere);
+// controls
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
 
-const torus_geometry = new THREE.TorusGeometry(0.5, 0.2, 16, 100);
-const torus_material = new THREE.MeshBasicMaterial({ color: 0x0000ff });
-const torus = new THREE.Mesh(torus_geometry, torus_material);
-torus.position.set(-2, 0, 0);
-scene.add(torus);
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+};
 
-renderer.render(scene, camera);
+animate();
